@@ -6,16 +6,27 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/18 16:46:16 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/19 10:55:43 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	free_set(char **set, t_stack *a)
+void	free_stack(t_stack *a)
+{
+	t_stack *cursor;
+
+	while (a)
+	{
+		cursor = a->next;
+		free(a);
+		a = cursor;
+	}
+}
+
+void	free_set(char **set)
 {
 	int	i;
-	t_stack *cursor;
 
 	i = 0;
 	while (set[i])
@@ -24,12 +35,6 @@ void	free_set(char **set, t_stack *a)
 		++i;
 	}
 	free(set);
-	while (a)
-	{
-		cursor = a->next;
-		free(a);
-		a = cursor;
-	}
 }
 
 t_stack	*init_stack(char **set)
@@ -47,7 +52,8 @@ t_stack	*init_stack(char **set)
 		new = malloc (sizeof(*new));
 		if (!new)
 		{
-			free_set(set, a);
+			free_set(set);
+			free_stack(a);
 			exit(1);
 		}
 		new->data = ft_atoi(set[i]);
@@ -91,7 +97,8 @@ int main(int ac, char *av[])
 		ft_printf("%d\n", b->data);
 		b = b->next;
 	}
-	free_set(set, a);
+	free_set(set);
+	free_stack(a);
 	return 0;
 }
 /* In case of error, it must display "Error" followed by a ’\n’ on the standard error.
