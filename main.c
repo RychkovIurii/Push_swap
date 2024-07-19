@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/19 14:30:30 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:44:50 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int	ft_helper_atoi2(const char *str, int *sign)
 
 int	ft_atoi2(const char *str, int *num)
 {
-	long long int	check;
 	long long int	result;
 	int				sign;
 	int				i;
@@ -49,7 +48,7 @@ int	ft_atoi2(const char *str, int *num)
 	return (1);
 }
 
-int	check_digit(char **set)
+int	check_isdigit(char **set)
 {
 	int	i;
 	int	j;
@@ -57,7 +56,6 @@ int	check_digit(char **set)
 	i = 0;
 	while (set[i])
 	{
-		//Think how to handle '-' and '+'
 		j = 0;
 		if (set[i][j] == '-' || set[i][j] == '+')
 			j++;
@@ -99,7 +97,7 @@ void	free_set(char **set)
 	free(set);
 }
 
-t_stack	*init_stack(char **set)
+t_stack	*init_stack(char **set, int flag)
 {
 	int	i;
 	int num;
@@ -111,10 +109,11 @@ t_stack	*init_stack(char **set)
 	num = 0;
 	a = NULL;
 	cursor = NULL;
-	if(!check_digit(set))
+	if(!check_isdigit(set))
 	{
 		ft_printf("Error\n");
-		free_set(set);
+		if (flag)
+			free_set(set);
 		exit(1);
 	}
 	while (set[i])
@@ -122,14 +121,17 @@ t_stack	*init_stack(char **set)
 		new = malloc (sizeof(*new));
 		if (!new)
 		{
-			ft_printf("Error\n");
-			free_set(set);
+			if (flag)
+				free_set(set);
 			free_stack(a);
 			exit(1);
 		}
 		if (!ft_atoi2(set[i], &num))
 		{
-			free_set(set);
+			ft_printf("Error\n");
+			free(new);
+			if (flag)
+				free_set(set);
 			free_stack(a);
 			exit(1);
 		}
@@ -148,6 +150,7 @@ t_stack	*init_stack(char **set)
 
 int main(int ac, char *av[])
 {
+	int flag;
 	t_stack *a;
 	t_stack *b;
 	char    **set;
@@ -155,17 +158,19 @@ int main(int ac, char *av[])
 	a = NULL;
 	b = NULL;
 	set = NULL;
+	flag = 0;
 	if (ac == 1)
 		return (1);
 	//validation for several args and isdigit, modify atoi to handle(0, -1)
 	else if (ac != 2)
-		a = init_stack(av + 1);
+		a = init_stack((av + 1), flag);
 	else
 	{
+		flag = 1;
 		set = ft_split(av[1], ' ');
 		if (!set)
 			return (1);
-		a = init_stack(set);
+		a = init_stack(set, flag);
 		free_set(set);
 	}
 	b = a;
