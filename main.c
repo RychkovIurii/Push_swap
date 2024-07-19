@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/19 11:33:11 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/19 13:37:25 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int	check_digit(char **set)
 	{
 		//Think how to handle '-' and '+'
 		j = 0;
-		if (set[i][0] == '0' && set[i][1] != '\0')
+		if (set[i][j] == '-' || set[i][j] == '+')
+			j++;
+		if (set[i][j] == '\0')
 			return (0);
 		while(set[i][j])
 		{
@@ -55,7 +57,7 @@ void	free_set(char **set)
 	while (set[i])
 	{
 		free(set[i]);
-		++i;
+		i++;
 	}
 	free(set);
 }
@@ -100,14 +102,13 @@ t_stack	*init_stack(char **set)
 
 int main(int ac, char *av[])
 {
-	int i;
 	t_stack *a;
 	t_stack *b;
 	char    **set;
 
-	i = 0;
 	a = NULL;
 	b = NULL;
+	set = NULL;
 	if (ac == 1)
 		return (1);
 	//validation for several args and isdigit, modify atoi to handle(0, -1)
@@ -119,6 +120,7 @@ int main(int ac, char *av[])
 		if (!set)
 			return (1);
 		a = init_stack(set);
+		free_set(set);
 	}
 	b = a;
 	while (b)
@@ -126,7 +128,6 @@ int main(int ac, char *av[])
 		ft_printf("%d\n", b->data);
 		b = b->next;
 	}
-	free_set(set);
 	free_stack(a);
 	return 0;
 }
