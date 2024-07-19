@@ -6,11 +6,22 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/19 15:44:50 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/19 16:30:01 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	check_duplicates(t_stack *a, int num)
+{
+	while (a)
+	{
+		if (a->data == num)
+			return (0);
+		a = a->next;
+	}
+	return (1);
+}
 
 static int	ft_helper_atoi2(const char *str, int *sign)
 {
@@ -126,7 +137,7 @@ t_stack	*init_stack(char **set, int flag)
 			free_stack(a);
 			exit(1);
 		}
-		if (!ft_atoi2(set[i], &num))
+		if (!ft_atoi2(set[i], &num) || !check_duplicates(a, num))
 		{
 			ft_printf("Error\n");
 			free(new);
@@ -180,7 +191,7 @@ int main(int ac, char *av[])
 		b = b->next;
 	}
 	free_stack(a);
-	return 0;
+	return (0);
 }
 /* In case of error, it must display "Error" followed by a ’\n’ on the standard error.
 Errors include for example: some arguments aren’t integers, some arguments are
