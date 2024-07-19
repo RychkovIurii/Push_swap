@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:13:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/18 13:26:37 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/19 14:25:52 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
+# include <limits.h>
 # include "libft.h"
 
 typedef struct s_stack
