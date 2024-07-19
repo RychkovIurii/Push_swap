@@ -6,11 +6,34 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/19 10:55:43 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/19 11:33:11 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	check_digit(char **set)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (set[i])
+	{
+		//Think how to handle '-' and '+'
+		j = 0;
+		if (set[i][0] == '0' && set[i][1] != '\0')
+			return (0);
+		while(set[i][j])
+		{
+			if (!ft_isdigit(set[i][j]))
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
 
 void	free_stack(t_stack *a)
 {
@@ -47,6 +70,12 @@ t_stack	*init_stack(char **set)
 	i = 0;
 	a = NULL;
 	cursor = NULL;
+	if(!check_digit(set))
+	{
+		ft_printf("Error\n");
+		free_set(set);
+		exit(1);
+	}
 	while (set[i])
 	{
 		new = malloc (sizeof(*new));
