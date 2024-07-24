@@ -6,11 +6,32 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/19 16:30:01 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/24 16:07:17 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int is_sorted(t_stack *stack)
+{
+	int		resets;
+	t_stack	*current;
+
+	if (!stack || !stack->next)
+		return 1; //Error check?
+
+	current = stack;
+	resets = 0;
+	while (current->next)
+	{
+		if (current->data > current->next->data)
+			resets++;
+		current = current->next;
+	}
+	if (stack->data < current->data)
+		resets++;
+	return resets <= 1;
+}
 
 int	check_duplicates(t_stack *a, int num)
 {
@@ -190,6 +211,10 @@ int main(int ac, char *av[])
 		ft_printf("%d\n", b->data);
 		b = b->next;
 	}
+	if (is_sorted(a))
+		ft_printf("it's sorted");
+	else
+		ft_printf("it isn't sorted");
 	free_stack(a);
 	return (0);
 }
