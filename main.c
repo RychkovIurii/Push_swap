@@ -6,11 +6,88 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/24 16:07:17 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/25 15:32:28 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	push(t_stack **src, t_stack **dst)
+{
+	if (*src == NULL)
+		return;
+
+	t_stack *temp = *src;
+	*src = (*src)->next;
+	temp->next = *dst;
+	*dst = temp;
+}
+/* 
+void	rotate(t_stack **stack)
+{
+	//rotate
+}
+
+void	swap(t_stack **stack)
+{
+	//swap
+}
+
+void	sa(t_stack **stack_a)
+{
+	//Swap the first 2 elements at the top of stack a.
+}
+
+void	sb(t_stack **stack_b)
+{
+	//Swap the first 2 elements at the top of stack b.
+}
+
+void	ss(t_stack **stack_a, t_stack **stack_b)
+{
+	//sa and sb at the same time.
+}
+
+void	pa(t_stack **stack_b, t_stack **stack_a)
+{
+	//Take the first element at the top of b and put it at the top of a.
+}
+ */
+void	pb(t_stack **stack_a, t_stack **stack_b)
+{
+	//Take the first element at the top of a and put it at the top of b.
+	push(stack_a, stack_b);
+}
+/* 
+void	ra(t_stack **stack_a)
+{
+	//Shift up all elements of stack a by 1.
+}
+
+void	rb(t_stack **stack_b)
+{
+	//Shift up all elements of stack b by 1.
+}
+
+void	rr(t_stack **stack_a, t_stack **stack_b)
+{
+	//ra and rb at the same time.
+}
+
+void	rra(t_stack **stack_a)
+{
+	//Shift down all elements of stack a by 1. The last element becomes the first one.
+}
+
+void	rrb(t_stack **stack_b)
+{
+	//Shift down all elements of stack b by 1. The last element becomes the first one.
+}
+
+void	rrr(t_stack **stack_a, t_stack **stack_b)
+{
+	//rra and rrb at the same time.
+} */
 
 int is_sorted(t_stack *stack)
 {
@@ -182,10 +259,10 @@ t_stack	*init_stack(char **set, int flag)
 
 int main(int ac, char *av[])
 {
-	int flag;
-	t_stack *a;
-	t_stack *b;
-	char    **set;
+	int		flag;
+	t_stack	*a;
+	t_stack	*b;
+	char	**set;
 
 	a = NULL;
 	b = NULL;
@@ -205,11 +282,16 @@ int main(int ac, char *av[])
 		a = init_stack(set, flag);
 		free_set(set);
 	}
-	b = a;
+	pb(&a ,&b);
 	while (b)
 	{
-		ft_printf("%d\n", b->data);
+		ft_printf("%d\n\n", b->data);
 		b = b->next;
+	}
+	while (a)
+	{
+		ft_printf("%d\n", a->data);
+		a = a->next;
 	}
 	if (is_sorted(a))
 		ft_printf("it's sorted");
