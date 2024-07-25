@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/25 15:32:28 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/25 16:03:38 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,13 @@ void	ss(t_stack **stack_a, t_stack **stack_b)
 {
 	//sa and sb at the same time.
 }
-
-void	pa(t_stack **stack_b, t_stack **stack_a)
+ */
+void	pa(t_stack **stack_a, t_stack **stack_b)
 {
+	push(stack_b, stack_a);
 	//Take the first element at the top of b and put it at the top of a.
 }
- */
+
 void	pb(t_stack **stack_a, t_stack **stack_b)
 {
 	//Take the first element at the top of a and put it at the top of b.
@@ -257,6 +258,28 @@ t_stack	*init_stack(char **set, int flag)
 
 }
 
+void print_ab(t_stack *a, t_stack *b) {
+	t_stack *temp_a = a;
+	t_stack *temp_b = b;
+
+	ft_printf("Stack A:\n");
+	while (temp_a) {
+		ft_printf("%d\n", temp_a->data);
+		temp_a = temp_a->next;
+	}
+
+	ft_printf("\nStack B:\n");
+	while (temp_b) {
+		ft_printf("%d\n", temp_b->data);
+		temp_b = temp_b->next;
+	}
+
+	if (is_sorted(a))
+		ft_printf("\nStack A is sorted\n");
+	else
+		ft_printf("\nStack A is not sorted\n");
+}
+
 int main(int ac, char *av[])
 {
 	int		flag;
@@ -283,21 +306,12 @@ int main(int ac, char *av[])
 		free_set(set);
 	}
 	pb(&a ,&b);
-	while (b)
-	{
-		ft_printf("%d\n\n", b->data);
-		b = b->next;
-	}
-	while (a)
-	{
-		ft_printf("%d\n", a->data);
-		a = a->next;
-	}
-	if (is_sorted(a))
-		ft_printf("it's sorted");
-	else
-		ft_printf("it isn't sorted");
-	free_stack(a);
+	print_ab(a, b);
+	pb(&a ,&b);
+	print_ab(a, b);
+	pa(&a ,&b);
+	print_ab(a, b);
+	
 	return (0);
 }
 /* In case of error, it must display "Error" followed by a ’\n’ on the standard error.
