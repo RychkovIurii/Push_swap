@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/25 16:03:38 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/25 16:23:50 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,35 +22,48 @@ void	push(t_stack **src, t_stack **dst)
 	temp->next = *dst;
 	*dst = temp;
 }
-/* 
-void	rotate(t_stack **stack)
+
+/* void	rotate(t_stack **stack)
 {
 	//rotate
-}
+} */
 
 void	swap(t_stack **stack)
 {
-	//swap
+	if (*stack == NULL || (*stack)->next == NULL)
+	return;
+
+	t_stack *first = *stack;
+	t_stack *second = (*stack)->next;
+
+	first->next = second->next;
+	second->next = first;
+	*stack = second;
 }
 
 void	sa(t_stack **stack_a)
 {
-	//Swap the first 2 elements at the top of stack a.
+	swap(stack_a);
+	ft_printf("\t\tsa\n");
 }
 
 void	sb(t_stack **stack_b)
 {
-	//Swap the first 2 elements at the top of stack b.
+	swap(stack_b);
+	ft_printf("\t\tsb\n");
 }
 
 void	ss(t_stack **stack_a, t_stack **stack_b)
 {
-	//sa and sb at the same time.
+	swap(stack_a);
+	swap(stack_b);
+	ft_printf("\t\tss\n");
 }
- */
+
 void	pa(t_stack **stack_a, t_stack **stack_b)
 {
 	push(stack_b, stack_a);
+	ft_printf("\t\tpa\n");
 	//Take the first element at the top of b and put it at the top of a.
 }
 
@@ -58,6 +71,7 @@ void	pb(t_stack **stack_a, t_stack **stack_b)
 {
 	//Take the first element at the top of a and put it at the top of b.
 	push(stack_a, stack_b);
+	ft_printf("\t\tpb\n");
 }
 /* 
 void	ra(t_stack **stack_a)
@@ -306,10 +320,20 @@ int main(int ac, char *av[])
 		free_set(set);
 	}
 	pb(&a ,&b);
-	print_ab(a, b);
+	pb(&a ,&b);
 	pb(&a ,&b);
 	print_ab(a, b);
+
 	pa(&a ,&b);
+	print_ab(a, b);
+
+	sa(&a);
+	print_ab(a, b);
+
+	sb(&b);
+	print_ab(a, b);
+
+	ss(&a, &b);
 	print_ab(a, b);
 	
 	return (0);
