@@ -6,13 +6,13 @@
 #    By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/18 11:21:16 by irychkov          #+#    #+#              #
-#    Updated: 2024/07/18 11:25:05 by irychkov         ###   ########.fr        #
+#    Updated: 2024/07/26 10:15:55 by irychkov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
-SRCS = main.c 
+SRCS = main.c push.c swap.c rotate.c reverse_rotate.c
 
 OBJS = $(SRCS:.c=.o)
 

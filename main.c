@@ -6,145 +6,11 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/26 09:55:08 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/26 10:20:59 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	push(t_stack **src, t_stack **dst)
-{
-	t_stack *temp;
-
-	if (*src == NULL)
-		return;
-	temp = *src;
-	*src = (*src)->next;
-	temp->next = *dst;
-	*dst = temp;
-}
-
-void	rotate(t_stack **stack)
-{
-	t_stack *first;
-	t_stack *last;
-
-	if (*stack == NULL || (*stack)->next == NULL)
-		return;
-	first = *stack;
-	last = *stack;
-	while (last->next)
-		last = last->next;
-	*stack = first->next;
-	first->next = NULL;
-	last->next = first;
-}
-
-void	reverse_rotate(t_stack **stack)
-{
-	t_stack *prev;
-	t_stack *current;
-
-	if (*stack == NULL || (*stack)->next == NULL)
-		return;
-	prev = NULL;
-	current = *stack;
-	while (current->next)
-	{
-		prev = current;
-		current = current->next;
-	}
-	if (prev)
-		prev->next = NULL;
-	current->next = *stack;
-	*stack = current;
-}
-
-void	swap(t_stack **stack)
-{
-	t_stack *first;
-	t_stack *second;
-
-	if (*stack == NULL || (*stack)->next == NULL)
-	return;
-	first = *stack;
-	second = (*stack)->next;
-	first->next = second->next;
-	second->next = first;
-	*stack = second;
-}
-
-void	sa(t_stack **stack_a)
-{
-	swap(stack_a);
-	ft_printf("\t\tsa\n");
-}
-
-void	sb(t_stack **stack_b)
-{
-	swap(stack_b);
-	ft_printf("\t\tsb\n");
-}
-
-void	ss(t_stack **stack_a, t_stack **stack_b)
-{
-	swap(stack_a);
-	swap(stack_b);
-	ft_printf("\t\tss\n");
-}
-
-void	pa(t_stack **stack_a, t_stack **stack_b)
-{
-	push(stack_b, stack_a);
-	ft_printf("\t\tpa\n");
-}
-
-void	pb(t_stack **stack_a, t_stack **stack_b)
-{
-	push(stack_a, stack_b);
-	ft_printf("\t\tpb\n");
-}
-
-void	ra(t_stack **stack_a)
-{
-	rotate(stack_a);
-	ft_printf("\t\tra\n");
-}
-
-void	rb(t_stack **stack_b)
-{
-	rotate(stack_b);
-	ft_printf("\t\trb\n");
-}
-
-void	rr(t_stack **stack_a, t_stack **stack_b)
-{
-	rotate(stack_a);
-	rotate(stack_b);
-	ft_printf("\t\trr\n");
-}
-
-void	rra(t_stack **stack_a)
-{
-	//Shift down all elements of stack a by 1. The last element becomes the first one.
-	reverse_rotate(stack_a);
-	ft_printf("\t\trra\n");
-}
-
-void	rrb(t_stack **stack_b)
-{
-	//Shift down all elements of stack b by 1. The last element becomes the first one.
-	reverse_rotate(stack_b);
-	ft_printf("\t\trrb\n");
-}
-
-void	rrr(t_stack **stack_a, t_stack **stack_b)
-{
-	//rra and rrb at the same time.
-	reverse_rotate(stack_a);
-	reverse_rotate(stack_b);
-	ft_printf("\t\trrr\n");
-}
 
 int is_sorted(t_stack *stack)
 {
@@ -365,8 +231,9 @@ int main(int ac, char *av[])
 	pb(&a ,&b);
 	pb(&a ,&b);
 	pb(&a ,&b);
+	pb(&a ,&b);
 	print_ab(a, b);
-/*
+
 	pa(&a ,&b);
 	print_ab(a, b);
 
@@ -386,7 +253,7 @@ int main(int ac, char *av[])
 	print_ab(a, b);
 
 	rr(&a, &b);
-	print_ab(a, b); */
+	print_ab(a, b);
 
 	rra(&a);
 	print_ab(a, b);
