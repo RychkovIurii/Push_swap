@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/25 16:23:50 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/26 09:35:17 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,41 @@
 
 void	push(t_stack **src, t_stack **dst)
 {
+	t_stack *temp;
+
 	if (*src == NULL)
 		return;
-
-	t_stack *temp = *src;
+	temp = *src;
 	*src = (*src)->next;
 	temp->next = *dst;
 	*dst = temp;
 }
 
-/* void	rotate(t_stack **stack)
+void	rotate(t_stack **stack)
 {
-	//rotate
-} */
+	t_stack *first;
+	t_stack *last;
+
+	if (*stack == NULL || (*stack)->next == NULL)
+		return;
+	first = *stack;
+	last = *stack;
+	while (last->next)
+		last = last->next;
+	*stack = first->next;
+	first->next = NULL;
+	last->next = first;
+}
 
 void	swap(t_stack **stack)
 {
+	t_stack *first;
+	t_stack *second;
+
 	if (*stack == NULL || (*stack)->next == NULL)
 	return;
-
-	t_stack *first = *stack;
-	t_stack *second = (*stack)->next;
-
+	first = *stack;
+	second = (*stack)->next;
 	first->next = second->next;
 	second->next = first;
 	*stack = second;
@@ -64,31 +77,35 @@ void	pa(t_stack **stack_a, t_stack **stack_b)
 {
 	push(stack_b, stack_a);
 	ft_printf("\t\tpa\n");
-	//Take the first element at the top of b and put it at the top of a.
 }
 
 void	pb(t_stack **stack_a, t_stack **stack_b)
 {
-	//Take the first element at the top of a and put it at the top of b.
 	push(stack_a, stack_b);
 	ft_printf("\t\tpb\n");
 }
-/* 
+
 void	ra(t_stack **stack_a)
 {
 	//Shift up all elements of stack a by 1.
+	rotate(stack_a);
+	ft_printf("\t\tra\n");
 }
 
 void	rb(t_stack **stack_b)
 {
 	//Shift up all elements of stack b by 1.
+	rotate(stack_b);
+	ft_printf("\t\trb\n");
 }
 
 void	rr(t_stack **stack_a, t_stack **stack_b)
 {
-	//ra and rb at the same time.
+	rotate(stack_a);
+	rotate(stack_b);
+	ft_printf("\t\trr\n");
 }
-
+/* 
 void	rra(t_stack **stack_a)
 {
 	//Shift down all elements of stack a by 1. The last element becomes the first one.
@@ -322,8 +339,9 @@ int main(int ac, char *av[])
 	pb(&a ,&b);
 	pb(&a ,&b);
 	pb(&a ,&b);
+	pb(&a ,&b);
 	print_ab(a, b);
-
+/*
 	pa(&a ,&b);
 	print_ab(a, b);
 
@@ -334,6 +352,15 @@ int main(int ac, char *av[])
 	print_ab(a, b);
 
 	ss(&a, &b);
+	print_ab(a, b); */
+
+	ra(&a);
+	print_ab(a, b);
+
+	rb(&b);
+	print_ab(a, b);
+
+	rr(&a, &b);
 	print_ab(a, b);
 	
 	return (0);
