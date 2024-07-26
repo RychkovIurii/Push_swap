@@ -6,11 +6,26 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/26 10:20:59 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/26 10:43:32 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	stack_size(t_stack *stack)
+{
+	int		i;
+	t_stack	*ptr;
+
+	ptr = stack;
+	i = 0;
+	while (ptr != NULL)
+	{
+		i++;
+		ptr = ptr->next;
+	}
+	return (i);
+}
 
 int is_sorted(t_stack *stack)
 {
@@ -204,6 +219,7 @@ void print_ab(t_stack *a, t_stack *b) {
 
 int main(int ac, char *av[])
 {
+	int stacksize;
 	int		flag;
 	t_stack	*a;
 	t_stack	*b;
@@ -213,6 +229,7 @@ int main(int ac, char *av[])
 	b = NULL;
 	set = NULL;
 	flag = 0;
+	stacksize = 0;
 	if (ac == 1)
 		return (1);
 	//validation for several args and isdigit, modify atoi to handle(0, -1)
@@ -227,7 +244,9 @@ int main(int ac, char *av[])
 		a = init_stack(set, flag);
 		free_set(set);
 	}
-	pb(&a ,&b);
+	stacksize = stack_size(a);
+	ft_printf("\nStacksize is %d\n", stacksize);
+/* 	pb(&a ,&b);
 	pb(&a ,&b);
 	pb(&a ,&b);
 	pb(&a ,&b);
@@ -262,7 +281,7 @@ int main(int ac, char *av[])
 	print_ab(a, b);
 
 	rrr(&a, &b);
-	print_ab(a, b);
+	print_ab(a, b); */
 	
 	return (0);
 }
