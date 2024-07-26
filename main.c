@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/26 09:35:17 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/26 09:55:08 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,26 @@ void	rotate(t_stack **stack)
 	*stack = first->next;
 	first->next = NULL;
 	last->next = first;
+}
+
+void	reverse_rotate(t_stack **stack)
+{
+	t_stack *prev;
+	t_stack *current;
+
+	if (*stack == NULL || (*stack)->next == NULL)
+		return;
+	prev = NULL;
+	current = *stack;
+	while (current->next)
+	{
+		prev = current;
+		current = current->next;
+	}
+	if (prev)
+		prev->next = NULL;
+	current->next = *stack;
+	*stack = current;
 }
 
 void	swap(t_stack **stack)
@@ -87,14 +107,12 @@ void	pb(t_stack **stack_a, t_stack **stack_b)
 
 void	ra(t_stack **stack_a)
 {
-	//Shift up all elements of stack a by 1.
 	rotate(stack_a);
 	ft_printf("\t\tra\n");
 }
 
 void	rb(t_stack **stack_b)
 {
-	//Shift up all elements of stack b by 1.
 	rotate(stack_b);
 	ft_printf("\t\trb\n");
 }
@@ -105,21 +123,28 @@ void	rr(t_stack **stack_a, t_stack **stack_b)
 	rotate(stack_b);
 	ft_printf("\t\trr\n");
 }
-/* 
+
 void	rra(t_stack **stack_a)
 {
 	//Shift down all elements of stack a by 1. The last element becomes the first one.
+	reverse_rotate(stack_a);
+	ft_printf("\t\trra\n");
 }
 
 void	rrb(t_stack **stack_b)
 {
 	//Shift down all elements of stack b by 1. The last element becomes the first one.
+	reverse_rotate(stack_b);
+	ft_printf("\t\trrb\n");
 }
 
 void	rrr(t_stack **stack_a, t_stack **stack_b)
 {
 	//rra and rrb at the same time.
-} */
+	reverse_rotate(stack_a);
+	reverse_rotate(stack_b);
+	ft_printf("\t\trrr\n");
+}
 
 int is_sorted(t_stack *stack)
 {
@@ -352,7 +377,7 @@ int main(int ac, char *av[])
 	print_ab(a, b);
 
 	ss(&a, &b);
-	print_ab(a, b); */
+	print_ab(a, b);
 
 	ra(&a);
 	print_ab(a, b);
@@ -361,6 +386,15 @@ int main(int ac, char *av[])
 	print_ab(a, b);
 
 	rr(&a, &b);
+	print_ab(a, b); */
+
+	rra(&a);
+	print_ab(a, b);
+
+	rrb(&b);
+	print_ab(a, b);
+
+	rrr(&a, &b);
 	print_ab(a, b);
 	
 	return (0);
