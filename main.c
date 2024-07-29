@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: irychkov <irychkov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/26 10:43:32 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/29 11:06:00 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,28 @@ int	stack_size(t_stack *stack)
 	return (i);
 }
 
-int is_sorted(t_stack *stack)
+void sort_three(t_stack **stack)
+{
+	int a;
+	int b;
+	int c;
+
+	a = (*stack)->data;
+	b = (*stack)->next->data;
+	c = (*stack)->next->next->data;
+	if (a > b && b < c && a < c)
+		sa(stack);
+	else if (a > b && b > c)
+		sa(stack), rra(stack);
+	else if (a > b && b < c && a > c)
+		ra(stack);
+	else if (a < b && b > c && a < c)
+		sa(stack), ra(stack);
+	else if (a < b && b > c && a > c)
+		rra(stack);
+}
+
+int is_almost_sorted(t_stack *stack)
 {
 	int		resets;
 	t_stack	*current;
@@ -211,7 +232,7 @@ void print_ab(t_stack *a, t_stack *b) {
 		temp_b = temp_b->next;
 	}
 
-	if (is_sorted(a))
+	if (is_almost_sorted(a))
 		ft_printf("\nStack A is sorted\n");
 	else
 		ft_printf("\nStack A is not sorted\n");
@@ -246,6 +267,14 @@ int main(int ac, char *av[])
 	}
 	stacksize = stack_size(a);
 	ft_printf("\nStacksize is %d\n", stacksize);
+
+	if (stacksize == 3)
+		sort_three(&a);
+
+	print_ab(a, b);
+	free_stack(a);
+
+	return  0;
 /* 	pb(&a ,&b);
 	pb(&a ,&b);
 	pb(&a ,&b);
