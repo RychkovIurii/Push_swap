@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:13:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/26 10:19:37 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/29 23:53:35 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 typedef struct s_stack
 {
 	int	data;
+	int	index;
+	int	above_median;
+	int	cost;
+	struct s_stack *target;
 	struct s_stack *next;
 }	t_stack;
 
