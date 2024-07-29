@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irychkov <irychkov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/29 11:06:00 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/29 23:53:39 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,165 @@ int	stack_size(t_stack *stack)
 		ptr = ptr->next;
 	}
 	return (i);
+}
+
+t_stack	*get_cheap(t_stack *stack)
+{
+	int		min;
+	t_stack	*cheap;
+
+	if (!stack)
+		return (NULL);
+	min = stack->cost;
+	cheap = stack;
+	while (stack)
+	{
+		if (stack->cost < min)
+		{
+			min = stack->cost;
+			cheap = stack;
+		}
+		stack = stack->next;
+	}
+	return (cheap);
+}
+
+void	rotate_to_top(t_stack **stack, t_stack *aim, char stack_name)
+{
+	while (*stack != aim)
+	{
+		if (stack_name == 'a')
+		{
+			if (aim->above_median)
+				ra(stack);
+			else
+				rra(stack);
+		}
+		else if (stack_name == 'b')
+		{
+			if (aim->above_median)
+				rb(stack);
+			else
+				rrb(stack);
+		}
+	}
+}
+
+void	set_index(t_stack *stack)
+{
+	int	i;
+	int	median;
+
+	i = 0;
+	if (!stack)
+		return ;
+	median = stack_size(stack) / 2;
+	while (stack)
+	{
+		stack->index = i;
+		if (i <= median)
+			stack->above_median = 1;
+		else
+			stack->above_median = 0;
+		stack = stack->next;
+		i++;
+	}
+}
+
+void	fill_a(t_stack **a, t_stack **b)
+{
+	t_stack	*cheap;
+
+	cheap = get_cheap(*b);
+	while (*a != cheap->target && *b != cheap)
+	{
+		if (cheap->above_median && cheap->target->above_median)
+			rr(a, b);
+		else if (!(cheap->above_median) && !(cheap->target->above_median))
+			rrr(a, b);
+		else
+			break;
+	}
+	set_index(*a);
+	set_index(*b);
+	rotate_to_top(b, cheap, 'b');
+	rotate_to_top(a, cheap->target, 'a');
+	pa(a, b);
+}
+
+t_stack	*get_min(t_stack *stack)
+{
+	int		minimum;
+	t_stack	*min;
+
+	if (!stack)
+		return (NULL);
+	minimum = stack->data;
+	while (stack)
+	{
+		if (stack->data < minimum)
+		{
+			minimum = stack->data;
+			min = stack;
+		}
+		stack = stack->next;
+	}
+	return (min);
+}
+
+void	set_target(t_stack *a, t_stack *b)
+{
+	t_stack *ptr;
+	t_stack *target;
+	long long int	match;
+
+	while(b)
+	{
+		match = LONG_MAX;
+		ptr = a;
+		while(ptr)
+		{
+			if (ptr->data > b->data && ptr->data < match)
+			{
+				match = ptr->data;
+				target = ptr;
+			}
+			ptr = ptr->next;
+		}
+		if (match == LONG_MAX)
+			b->target = get_min(a);
+		else
+			b->target = target;
+		b = b->next;
+	}
+}
+
+void	set_cost(t_stack *a, t_stack *b)
+{
+	int	len_a;
+	int	len_b;
+
+	len_a = stack_size(a);
+	len_b = stack_size(b);
+	while (b)
+	{
+		b->cost = b->index;
+		if (!(b->above_median))
+			b->cost = len_b - (b->index);
+		if (b->target->above_median)
+			b->cost = b->cost + b->target->index;
+		else
+			b->cost = b->cost + len_a - (b->target->index);
+		b = b->next;
+	}
+}
+
+void	init_info(t_stack *a, t_stack *b)
+{
+	set_index(a);
+	set_index(b);
+	set_target(a, b);
+	set_cost(a, b);
 }
 
 void sort_three(t_stack **stack)
@@ -54,7 +213,7 @@ int is_almost_sorted(t_stack *stack)
 	t_stack	*current;
 
 	if (!stack || !stack->next)
-		return 1; //Error check?
+		return 0; //Error check?
 
 	current = stack;
 	resets = 0;
@@ -216,6 +375,31 @@ t_stack	*init_stack(char **set, int flag)
 
 }
 
+int is_sorted(t_stack *stack)
+{
+	while (stack && stack->next)
+	{
+		if (stack->data > stack->next->data)
+			return 0;
+		stack = stack->next;
+	}
+	return 1;
+}
+
+void	sort_almost_sorted(t_stack **a)
+{
+	t_stack *min_node = get_min(*a);
+	rotate_to_top(a, min_node, 'a');
+
+	while (!is_sorted(*a))
+	{
+		if ((*a)->data > (*a)->next->data)
+			sa(a);
+		else
+			ra(a);
+	}
+}
+
 void print_ab(t_stack *a, t_stack *b) {
 	t_stack *temp_a = a;
 	t_stack *temp_b = b;
@@ -232,7 +416,7 @@ void print_ab(t_stack *a, t_stack *b) {
 		temp_b = temp_b->next;
 	}
 
-	if (is_almost_sorted(a))
+	if (is_sorted(a))
 		ft_printf("\nStack A is sorted\n");
 	else
 		ft_printf("\nStack A is not sorted\n");
@@ -240,7 +424,7 @@ void print_ab(t_stack *a, t_stack *b) {
 
 int main(int ac, char *av[])
 {
-	int stacksize;
+	int	stacksize;
 	int		flag;
 	t_stack	*a;
 	t_stack	*b;
@@ -268,13 +452,26 @@ int main(int ac, char *av[])
 	stacksize = stack_size(a);
 	ft_printf("\nStacksize is %d\n", stacksize);
 
-	if (stacksize == 3)
+	if (stacksize == 2)
+		sa(&a);
+	else if (stacksize == 3)
 		sort_three(&a);
-
+	else if (is_almost_sorted(a))
+		sort_almost_sorted(&a);
+	else
+	{
+		while (stack_size(a) > 3 && !(is_almost_sorted(a)))
+			pb(&a ,&b);
+		while (b)
+		{
+			init_info(a, b);
+			fill_a(&a, &b);
+		}
+	}
 	print_ab(a, b);
 	free_stack(a);
+	free_stack(b);
 
-	return  0;
 /* 	pb(&a ,&b);
 	pb(&a ,&b);
 	pb(&a ,&b);
@@ -317,3 +514,5 @@ int main(int ac, char *av[])
 /* In case of error, it must display "Error" followed by a ’\n’ on the standard error.
 Errors include for example: some arguments aren’t integers, some arguments are
 bigger than an integer and/or there are duplicates. */
+
+// ./push_swap "" Should I print Error?
