@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/29 23:53:39 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/30 17:11:47 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,9 +180,10 @@ void	set_cost(t_stack *a, t_stack *b)
 
 void	init_info(t_stack *a, t_stack *b)
 {
-	set_index(a);
-	set_index(b);
 	set_target(a, b);
+	set_index(a);
+	ft_printf("we are between");
+	set_index(b);
 	set_cost(a, b);
 }
 
@@ -207,7 +208,7 @@ void sort_three(t_stack **stack)
 		rra(stack);
 }
 
-int is_almost_sorted(t_stack *stack)
+/* int is_almost_sorted(t_stack *stack)
 {
 	int		resets;
 	t_stack	*current;
@@ -225,8 +226,8 @@ int is_almost_sorted(t_stack *stack)
 	}
 	if (stack->data < current->data)
 		resets++;
-	return resets <= 1;
-}
+	return resets == 2;
+} */
 
 int	check_duplicates(t_stack *a, int num)
 {
@@ -437,7 +438,6 @@ int main(int ac, char *av[])
 	stacksize = 0;
 	if (ac == 1)
 		return (1);
-	//validation for several args and isdigit, modify atoi to handle(0, -1)
 	else if (ac != 2)
 		a = init_stack((av + 1), flag);
 	else
@@ -451,22 +451,27 @@ int main(int ac, char *av[])
 	}
 	stacksize = stack_size(a);
 	ft_printf("\nStacksize is %d\n", stacksize);
-
 	if (stacksize == 2)
 		sa(&a);
 	else if (stacksize == 3)
 		sort_three(&a);
-	else if (is_almost_sorted(a))
-		sort_almost_sorted(&a);
+/* 	else if (is_almost_sorted(a))
+		sort_almost_sorted(&a); */
 	else
 	{
-		while (stack_size(a) > 3 && !(is_almost_sorted(a)))
+		while (stack_size(a) > 3 && !(is_sorted(a)))
 			pb(&a ,&b);
+		sort_three(&a);
+		ft_printf("\nStacksize is %d\n", stack_size(a));
+		ft_printf("\nStacksize is %d\n", stack_size(b));
+		
 		while (b)
 		{
 			init_info(a, b);
 			fill_a(&a, &b);
+			ft_printf("\nStacksize A is %d\n", stack_size(a));
 		}
+ 		sort_almost_sorted(&a);
 	}
 	print_ab(a, b);
 	free_stack(a);
