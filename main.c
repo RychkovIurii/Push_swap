@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/30 17:11:47 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:53:52 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ t_stack	*get_min(t_stack *stack)
 	minimum = stack->data;
 	while (stack)
 	{
-		if (stack->data < minimum)
+		if (stack->data <= minimum)
 		{
 			minimum = stack->data;
 			min = stack;
@@ -182,7 +182,6 @@ void	init_info(t_stack *a, t_stack *b)
 {
 	set_target(a, b);
 	set_index(a);
-	ft_printf("we are between");
 	set_index(b);
 	set_cost(a, b);
 }
@@ -339,7 +338,7 @@ t_stack	*init_stack(char **set, int flag)
 	cursor = NULL;
 	if(!check_isdigit(set))
 	{
-		ft_printf("Error\n");
+		ft_putstr_fd("Error\n", 2);
 		if (flag)
 			free_set(set);
 		exit(1);
@@ -356,7 +355,7 @@ t_stack	*init_stack(char **set, int flag)
 		}
 		if (!ft_atoi2(set[i], &num) || !check_duplicates(a, num))
 		{
-			ft_printf("Error\n");
+			ft_putstr_fd("Error\n", 2);
 			free(new);
 			if (flag)
 				free_set(set);
@@ -450,7 +449,7 @@ int main(int ac, char *av[])
 		free_set(set);
 	}
 	stacksize = stack_size(a);
-	ft_printf("\nStacksize is %d\n", stacksize);
+	/* ft_printf("\nStacksize is %d\n", stacksize); */
 	if (stacksize == 2)
 		sa(&a);
 	else if (stacksize == 3)
@@ -462,18 +461,18 @@ int main(int ac, char *av[])
 		while (stack_size(a) > 3 && !(is_sorted(a)))
 			pb(&a ,&b);
 		sort_three(&a);
-		ft_printf("\nStacksize is %d\n", stack_size(a));
-		ft_printf("\nStacksize is %d\n", stack_size(b));
+		/* ft_printf("\nStacksize is %d\n", stack_size(a));
+		ft_printf("\nStacksize is %d\n", stack_size(b)); */
 		
 		while (b)
 		{
 			init_info(a, b);
 			fill_a(&a, &b);
-			ft_printf("\nStacksize A is %d\n", stack_size(a));
+			/* ft_printf("\nStacksize A is %d\n", stack_size(a)); */
 		}
  		sort_almost_sorted(&a);
 	}
-	print_ab(a, b);
+	/* print_ab(a, b); */
 	free_stack(a);
 	free_stack(b);
 
