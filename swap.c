@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 10:00:33 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/26 10:17:01 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:01:56 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,18 @@ static void	swap(t_stack **stack)
 void	sa(t_stack **stack_a)
 {
 	swap(stack_a);
-	ft_printf("\t\tsa\n");
+	ft_printf("sa\n");
 }
 
 void	sb(t_stack **stack_b)
 {
 	swap(stack_b);
-	ft_printf("\t\tsb\n");
+	ft_printf("sb\n");
 }
 
 void	ss(t_stack **stack_a, t_stack **stack_b)
 {
 	swap(stack_a);
 	swap(stack_b);
-	ft_printf("\t\tss\n");
+	ft_printf("ss\n");
 }

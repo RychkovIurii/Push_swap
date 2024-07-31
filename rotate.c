@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 10:10:54 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/26 10:18:01 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:01:27 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ static void	rotate(t_stack **stack)
 void	ra(t_stack **stack_a)
 {
 	rotate(stack_a);
-	ft_printf("\t\tra\n");
+	ft_printf("ra\n");
 }
 
 void	rb(t_stack **stack_b)
 {
 	rotate(stack_b);
-	ft_printf("\t\trb\n");
+	ft_printf("rb\n");
 }
 
 void	rr(t_stack **stack_a, t_stack **stack_b)
 {
 	rotate(stack_a);
 	rotate(stack_b);
-	ft_printf("\t\trr\n");
+	ft_printf("rr\n");
 }

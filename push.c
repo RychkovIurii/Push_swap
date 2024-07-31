@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 10:08:57 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/26 10:17:42 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:02:07 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static void	push(t_stack **src, t_stack **dst)
 void	pa(t_stack **stack_a, t_stack **stack_b)
 {
 	push(stack_b, stack_a);
-	ft_printf("\t\tpa\n");
+	ft_printf("pa\n");
 }
 
 void	pb(t_stack **stack_a, t_stack **stack_b)
 {
 	push(stack_a, stack_b);
-	ft_printf("\t\tpb\n");
+	ft_printf("pb\n");
 }
