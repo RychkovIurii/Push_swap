@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/31 11:53:52 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/01 14:57:54 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ t_stack	*get_min(t_stack *stack)
 	if (!stack)
 		return (NULL);
 	minimum = stack->data;
+	min = stack;
 	while (stack)
 	{
 		if (stack->data <= minimum)
@@ -450,7 +451,7 @@ int main(int ac, char *av[])
 	}
 	stacksize = stack_size(a);
 	/* ft_printf("\nStacksize is %d\n", stacksize); */
-	if (stacksize == 2)
+	if (stacksize == 2 && !(is_sorted(a)))
 		sa(&a);
 	else if (stacksize == 3)
 		sort_three(&a);
