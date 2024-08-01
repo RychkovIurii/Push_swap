@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/01 14:57:54 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:05:35 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -457,7 +457,7 @@ int main(int ac, char *av[])
 		sort_three(&a);
 /* 	else if (is_almost_sorted(a))
 		sort_almost_sorted(&a); */
-	else
+	else if (stacksize > 3)
 	{
 		while (stack_size(a) > 3 && !(is_sorted(a)))
 			pb(&a ,&b);
