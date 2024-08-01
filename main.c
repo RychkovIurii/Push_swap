@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/01 15:05:35 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:41:13 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -445,13 +445,21 @@ int main(int ac, char *av[])
 		flag = 1;
 		set = ft_split(av[1], ' ');
 		if (!set)
+		{
+			ft_putstr_fd("Error\n", 2);
 			return (1);
+		}
 		a = init_stack(set, flag);
 		free_set(set);
 	}
 	stacksize = stack_size(a);
 	/* ft_printf("\nStacksize is %d\n", stacksize); */
-	if (stacksize == 2 && !(is_sorted(a)))
+	if (stacksize == 0)
+	{
+		ft_putstr_fd("Error\n", 2);
+		return (1);
+	}
+	else if (stacksize == 2 && !(is_sorted(a)))
 		sa(&a);
 	else if (stacksize == 3)
 		sort_three(&a);
