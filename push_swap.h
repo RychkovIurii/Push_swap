@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:13:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/29 23:53:35 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/01 17:53:39 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,17 @@ void	rr(t_stack **stack_a, t_stack **stack_b);
 void	rra(t_stack **stack_a);
 void	rrb(t_stack **stack_b);
 void	rrr(t_stack **stack_a, t_stack **stack_b);
+void	init_info(t_stack *a, t_stack *b);
+void	set_index(t_stack *stack);
+void	fill_a(t_stack **a, t_stack **b);
+void	rotate_to_top(t_stack **stack, t_stack *aim, char stack_name);
+int		stack_size(t_stack *stack);
+int 	is_sorted(t_stack *stack);
+void	sort_almost_sorted(t_stack **a);
+void 	sort_three(t_stack **stack);
+void	free_stack(t_stack *a);
+void	free_set(char **set);
+t_stack	*init_stack(char **set, int flag);
+t_stack	*get_min(t_stack *stack);
 
 #endif
