@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:30:14 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/02 11:45:32 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:22:08 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static t_stack	*get_cheap(t_stack *stack)
 	int		min;
 	t_stack	*cheap;
 
-	if (!stack)
-		return (NULL);
 	min = stack->cost;
 	cheap = stack;
 	while (stack)

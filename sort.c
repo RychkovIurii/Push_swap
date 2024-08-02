@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:33:25 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/02 11:58:20 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:22:41 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ t_stack	*get_min(t_stack *stack)
 	int		minimum;
 	t_stack	*min;
 
-	if (!stack)
-		return (NULL);
 	minimum = stack->data;
 	min = stack;
 	while (stack)
