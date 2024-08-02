@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:13:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/02 11:58:40 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/02 12:12:16 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	fill_a(t_stack **a, t_stack **b);
 void	rotate_to_top(t_stack **stack, t_stack *aim, char stack_name);
 int		stack_size(t_stack *stack);
 int		is_sorted(t_stack *stack);
+int		ft_atoi2(const char *str, int *num);
 void	sort_almost_sorted(t_stack **a);
 void	sort_three(t_stack **stack);
 void	free_stack(t_stack *a);
