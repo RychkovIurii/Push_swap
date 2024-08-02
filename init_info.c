@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:20:59 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/01 17:28:52 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:49:05 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ int	stack_size(t_stack *stack)
 
 static void	set_target(t_stack *a, t_stack *b)
 {
-	t_stack *ptr;
-	t_stack *target;
+	t_stack			*ptr;
+	t_stack			*target;
 	long long int	match;
 
-	while(b)
+	while (b)
 	{
 		match = LONG_MAX;
 		ptr = a;
-		while(ptr)
+		while (ptr)
 		{
 			if (ptr->data > b->data && ptr->data < match)
 			{

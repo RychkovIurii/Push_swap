@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:30:14 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/02 10:47:41 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:45:32 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	fill_a(t_stack **a, t_stack **b)
 		else if (!(cheap->above_median) && !(cheap->target->above_median))
 			rrr(a, b);
 		else
-			break;
+			break ;
 	}
 	set_index(*a);
 	set_index(*b);

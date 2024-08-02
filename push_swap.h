@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:13:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/02 11:07:24 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:58:40 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 
 typedef struct s_stack
 {
-	int	data;
-	int	index;
-	int	above_median;
-	int	cost;
-	struct s_stack *target;
-	struct s_stack *next;
+	int				data;
+	int				index;
+	int				above_median;
+	int				cost;
+	struct s_stack	*target;
+	struct s_stack	*next;
 }	t_stack;
 
 void	pa(t_stack **stack_a, t_stack **stack_b);
@@ -43,9 +43,9 @@ void	set_index(t_stack *stack);
 void	fill_a(t_stack **a, t_stack **b);
 void	rotate_to_top(t_stack **stack, t_stack *aim, char stack_name);
 int		stack_size(t_stack *stack);
-int 	is_sorted(t_stack *stack);
+int		is_sorted(t_stack *stack);
 void	sort_almost_sorted(t_stack **a);
-void 	sort_three(t_stack **stack);
+void	sort_three(t_stack **stack);
 void	free_stack(t_stack *a);
 void	free_set(char **set);
 void	handle_error(char **set, t_stack *stack, int flag);

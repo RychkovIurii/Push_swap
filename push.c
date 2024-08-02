@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 10:08:57 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/31 11:02:07 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:53:35 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	push(t_stack **src, t_stack **dst)
 {
-	t_stack *temp;
+	t_stack	*temp;
 
 	if (*src == NULL)
-		return;
+		return ;
 	temp = *src;
 	*src = (*src)->next;
 	temp->next = *dst;

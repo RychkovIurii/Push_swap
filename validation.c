@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:36:23 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/02 11:21:47 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:59:05 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	check_isdigit(char **set)
 			j++;
 		if (set[i][j] == '\0')
 			return (0);
-		while(set[i][j])
+		while (set[i][j])
 		{
 			if (!ft_isdigit(set[i][j]))
 				return (0);
@@ -83,9 +83,9 @@ int	check_isdigit(char **set)
 	return (1);
 }
 
-void validate_input(char **set, int flag)
+void	validate_input(char **set, int flag)
 {
-	if(!check_isdigit(set))
+	if (!check_isdigit(set))
 	{
 		ft_putstr_fd("Error\n", 2);
 		if (flag)
@@ -96,9 +96,9 @@ void validate_input(char **set, int flag)
 
 t_stack	*init_stack(char **set, int flag)
 {
-	int	i;
-	int num;
-	t_stack *cursor;
+	int		i;
+	int		num;
+	t_stack	*cursor;
 	t_stack	*new;
 	t_stack	*a;
 

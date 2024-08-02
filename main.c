@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/01 17:50:12 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:47:53 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@
 		ft_printf("\nStack A is not sorted\n");
 } */
 
-int main(int ac, char *av[])
+int	main(int ac, char *av[])
 {
-	int	stacksize;
+	int		stacksize;
 	int		flag;
 	t_stack	*a;
 	t_stack	*b;
@@ -76,14 +76,14 @@ int main(int ac, char *av[])
 	else if (stacksize > 3)
 	{
 		while (stack_size(a) > 3 && !(is_sorted(a)))
-			pb(&a ,&b);
+			pb(&a, &b);
 		sort_three(&a);
 		while (b)
 		{
 			init_info(a, b);
 			fill_a(&a, &b);
 		}
- 		sort_almost_sorted(&a);
+		sort_almost_sorted(&a);
 	}
 	free_stack(a);
 	free_stack(b);

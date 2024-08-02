@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:33:25 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/02 10:48:58 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:58:20 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ t_stack	*get_min(t_stack *stack)
 	return (min);
 }
 
-void sort_three(t_stack **stack)
+void	sort_three(t_stack **stack)
 {
-	int a;
-	int b;
-	int c;
+	int	a;
+	int	b;
+	int	c;
 
 	a = (*stack)->data;
 	b = (*stack)->next->data;
@@ -45,31 +45,38 @@ void sort_three(t_stack **stack)
 	if (a > b && b < c && a < c)
 		sa(stack);
 	else if (a > b && b > c)
-		sa(stack), rra(stack);
+	{
+		sa(stack);
+		rra(stack);
+	}
 	else if (a > b && b < c && a > c)
 		ra(stack);
 	else if (a < b && b > c && a < c)
-		sa(stack), ra(stack);
+	{
+		sa(stack);
+		ra(stack);
+	}
 	else if (a < b && b > c && a > c)
 		rra(stack);
 }
 
-int is_sorted(t_stack *stack)
+int	is_sorted(t_stack *stack)
 {
 	while (stack && stack->next)
 	{
 		if (stack->data > stack->next->data)
-			return 0;
+			return (0);
 		stack = stack->next;
 	}
-	return 1;
+	return (1);
 }
 
 void	sort_almost_sorted(t_stack **a)
 {
-	t_stack *min_node = get_min(*a);
-	rotate_to_top(a, min_node, 'a');
+	t_stack	*min_node;
 
+	min_node = get_min(*a);
+	rotate_to_top(a, min_node, 'a');
 	while (!is_sorted(*a))
 	{
 		if ((*a)->data > (*a)->next->data)

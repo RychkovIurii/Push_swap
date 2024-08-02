@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 10:10:54 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/31 11:01:27 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:54:03 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static void	rotate(t_stack **stack)
 {
-	t_stack *first;
-	t_stack *last;
+	t_stack	*first;
+	t_stack	*last;
 
 	if (*stack == NULL || (*stack)->next == NULL)
-		return;
+		return ;
 	first = *stack;
 	last = *stack;
 	while (last->next)

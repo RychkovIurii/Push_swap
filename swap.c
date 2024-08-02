@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 10:00:33 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/31 11:01:56 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:44:42 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static void	swap(t_stack **stack)
 {
-	t_stack *first;
-	t_stack *second;
+	t_stack	*first;
+	t_stack	*second;
 
 	if (*stack == NULL || (*stack)->next == NULL)
-	return;
+		return ;
 	first = *stack;
 	second = (*stack)->next;
 	first->next = second->next;

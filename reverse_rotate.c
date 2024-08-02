@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 10:12:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/07/31 11:01:43 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:45:10 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static void	reverse_rotate(t_stack **stack)
 {
-	t_stack *prev;
-	t_stack *current;
+	t_stack	*prev;
+	t_stack	*current;
 
 	if (*stack == NULL || (*stack)->next == NULL)
-		return;
+		return ;
 	prev = NULL;
 	current = *stack;
 	while (current->next)
