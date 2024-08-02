@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 10:10:54 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/02 11:54:03 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/02 16:06:07 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,24 @@ static void	rotate(t_stack **stack)
 	last->next = first;
 }
 
-void	ra(t_stack **stack_a)
+void	ra(t_stack **stack_a, int flag)
 {
 	rotate(stack_a);
-	ft_printf("ra\n");
+	if (flag)
+		ft_printf("ra\n");
 }
 
-void	rb(t_stack **stack_b)
+void	rb(t_stack **stack_b, int flag)
 {
 	rotate(stack_b);
-	ft_printf("rb\n");
+	if (flag)
+		ft_printf("rb\n");
 }
 
-void	rr(t_stack **stack_a, t_stack **stack_b)
+void	rr(t_stack **stack_a, t_stack **stack_b, int flag)
 {
 	rotate(stack_a);
 	rotate(stack_b);
-	ft_printf("rr\n");
+	if (flag)
+		ft_printf("rr\n");
 }

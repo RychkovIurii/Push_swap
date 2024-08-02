@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:33:25 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/02 14:22:41 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/02 16:16:25 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,21 @@ void	sort_three(t_stack **stack)
 	b = (*stack)->next->data;
 	c = (*stack)->next->next->data;
 	if (a > b && b < c && a < c)
-		sa(stack);
+		sa(stack, 1);
 	else if (a > b && b > c)
 	{
-		sa(stack);
-		rra(stack);
+		sa(stack, 1);
+		rra(stack, 1);
 	}
 	else if (a > b && b < c && a > c)
-		ra(stack);
+		ra(stack, 1);
 	else if (a < b && b > c && a < c)
 	{
-		sa(stack);
-		ra(stack);
+		sa(stack, 1);
+		ra(stack, 1);
 	}
 	else if (a < b && b > c && a > c)
-		rra(stack);
+		rra(stack, 1);
 }
 
 int	is_sorted(t_stack *stack)
@@ -78,8 +78,8 @@ void	sort_almost_sorted(t_stack **a)
 	while (!is_sorted(*a))
 	{
 		if ((*a)->data > (*a)->next->data)
-			sa(a);
+			sa(a, 1);
 		else
-			ra(a);
+			ra(a, 1);
 	}
 }

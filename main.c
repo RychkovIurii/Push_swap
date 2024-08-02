@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/02 15:20:03 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/02 16:15:42 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ static void	sort_stack(t_stack **a, t_stack **b)
 		exit(1);
 	}
 	else if (stacksize == 2 && !is_sorted(*a))
-		sa(a);
+		sa(a, 1);
 	else if (stacksize == 3)
 		sort_three(a);
 	else if (stacksize > 3)
 	{
 		while (stack_size(*a) > 3 && !is_sorted(*a))
-			pb(a, b);
+			pb(a, b, 1);
 		sort_three(a);
 		while (*b)
 		{
