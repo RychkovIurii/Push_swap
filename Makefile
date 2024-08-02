@@ -6,16 +6,24 @@
 #    By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/18 11:21:16 by irychkov          #+#    #+#              #
-#    Updated: 2024/08/02 12:13:20 by irychkov         ###   ########.fr        #
+#    Updated: 2024/08/02 15:49:29 by irychkov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
+CHECKER = checker
 
 SRCS = main.c push.c swap.c rotate.c reverse_rotate.c fill_a.c free.c \
 		init_info.c sort.c validation.c ft_atoi2.c
 
+BONUS_SRCS = checker_bonus.c push_swap_bonus.c push.c swap.c rotate.c \
+		reverse_rotate.c fill_a.c free.c init_info.c sort.c validation.c \
+		ft_atoi2.c
+
+
 OBJS = $(SRCS:.c=.o)
+
+BONUS_OBJS = ${BONUS_SRCS:.c=.o}
 
 HEADERS = -I. -I$(LIBFT_DIR)
 
@@ -27,7 +35,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 CC = cc
 
-all: $(LIBFT) $(NAME)
+all: $(NAME)
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
@@ -36,18 +44,22 @@ $(LIBFT):
 	$(CC) $(CFLAGS) -c $< -o $@ $(HEADERS)
 	@echo "Compiling: $<"
 
-$(NAME): $(OBJS)
+$(NAME): $(LIBFT) $(OBJS)
 	@$(CC) $(OBJS) $(LIBFT) -o $(NAME)
 
+$(CHECKER): $(LIBFT) $(BONUS_OBJS)
+	@$(CC) $(BONUS_OBJS) $(LIBFT) -o $(CHECKER)
+
+bonus: checker
 
 clean:
-	@rm -rf $(OBJS)
+	@rm -rf $(OBJS) $(BONUS_OBJS)
 	@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -rf $(NAME) $(CHECKER)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re libft
+.PHONY: all clean fclean re libft bonus
