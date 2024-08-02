@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:36:23 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/01 17:48:19 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:21:47 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,17 @@ int	check_isdigit(char **set)
 	return (1);
 }
 
+void validate_input(char **set, int flag)
+{
+	if(!check_isdigit(set))
+	{
+		ft_putstr_fd("Error\n", 2);
+		if (flag)
+			free_set(set);
+		exit(1);
+	}
+}
+
 t_stack	*init_stack(char **set, int flag)
 {
 	int	i;
@@ -95,31 +106,16 @@ t_stack	*init_stack(char **set, int flag)
 	num = 0;
 	a = NULL;
 	cursor = NULL;
-	if(!check_isdigit(set))
-	{
-		ft_putstr_fd("Error\n", 2);
-		if (flag)
-			free_set(set);
-		exit(1);
-	}
+	validate_input(set, flag);
 	while (set[i])
 	{
 		new = malloc (sizeof(*new));
 		if (!new)
-		{
-			if (flag)
-				free_set(set);
-			free_stack(a);
-			exit(1);
-		}
+			handle_error(set, a, flag);
 		if (!ft_atoi2(set[i], &num) || !check_duplicates(a, num))
 		{
-			ft_putstr_fd("Error\n", 2);
 			free(new);
-			if (flag)
-				free_set(set);
-			free_stack(a);
-			exit(1);
+			handle_error(set, a, flag);
 		}
 		new->data = num;
 		new->next = NULL;
@@ -131,5 +127,4 @@ t_stack	*init_stack(char **set, int flag)
 		i++;
 	}
 	return (a);
-
 }
