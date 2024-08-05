@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:13:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/02 16:09:59 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/05 14:12:27 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,11 @@ void	sort_almost_sorted(t_stack **a);
 void	sort_three(t_stack **stack);
 void	free_stack(t_stack *a);
 void	free_set(char **set);
-void	handle_error(char **set, t_stack *stack, int flag);
-t_stack	*init_stack(char **set, int flag);
+void	print_and_free(char *str);
+void	print_and_exit(void);
+void	handle_error(char **set, t_stack *stack);
+char	**concat_and_split_args(int ac, char *av[]);
+t_stack	*init_stack(char **set);
 t_stack	*get_min(t_stack *stack);
 
 #endif

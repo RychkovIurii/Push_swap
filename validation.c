@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:36:23 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/02 12:19:48 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/05 13:48:42 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,16 @@ static int	check_isdigit(char **set)
 	return (1);
 }
 
-static void	validate_input(char **set, int flag)
+static void	validate_input(char **set)
 {
 	if (!check_isdigit(set))
 	{
-		ft_putstr_fd("Error\n", 2);
-		if (flag)
-			free_set(set);
-		exit(1);
+		free_set(set);
+		print_and_exit();
 	}
 }
 
-static t_stack	*create_new_element(char *str, t_stack *stack,
-				int flag, char **set)
+static t_stack	*create_new_element(char *str, t_stack *stack, char **set)
 {
 	t_stack	*new;
 	int		num;
@@ -67,18 +64,18 @@ static t_stack	*create_new_element(char *str, t_stack *stack,
 	num = 0;
 	new = malloc(sizeof(*new));
 	if (!new)
-		handle_error(set, stack, flag);
+		handle_error(set, stack);
 	if (!ft_atoi2(str, &num) || !check_duplicates(stack, num))
 	{
 		free(new);
-		handle_error(set, stack, flag);
+		handle_error(set, stack);
 	}
 	new->data = num;
 	new->next = NULL;
 	return (new);
 }
 
-t_stack	*init_stack(char **set, int flag)
+t_stack	*init_stack(char **set)
 {
 	int		i;
 	t_stack	*cursor;
@@ -88,10 +85,10 @@ t_stack	*init_stack(char **set, int flag)
 	i = 0;
 	a = NULL;
 	cursor = NULL;
-	validate_input(set, flag);
+	validate_input(set);
 	while (set[i])
 	{
-		new = create_new_element(set[i], a, flag, set);
+		new = create_new_element(set[i], a, set);
 		if (a == NULL)
 			a = new;
 		else

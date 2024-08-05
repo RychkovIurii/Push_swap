@@ -6,7 +6,7 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 15:01:35 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/02 16:42:39 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/05 14:04:39 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,10 @@ void	read_and_execute_instructions(t_stack **a, t_stack **b)
 	{
 		if (!execute_instruction(line, a, b))
 		{
-			ft_putstr_fd("Error\n", 2);
 			free(line);
 			free_stack(*a);
 			free_stack(*b);
-			exit(1);
+			print_and_exit();
 		}
 		free(line);
 		line = get_next_line(0);

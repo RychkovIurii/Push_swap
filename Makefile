@@ -6,7 +6,7 @@
 #    By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/18 11:21:16 by irychkov          #+#    #+#              #
-#    Updated: 2024/08/02 15:49:29 by irychkov         ###   ########.fr        #
+#    Updated: 2024/08/05 14:21:08 by irychkov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,11 @@ NAME = push_swap
 CHECKER = checker
 
 SRCS = main.c push.c swap.c rotate.c reverse_rotate.c fill_a.c free.c \
-		init_info.c sort.c validation.c ft_atoi2.c
+		init_info.c sort.c validation.c ft_atoi2.c argv_handler.c
 
 BONUS_SRCS = checker_bonus.c push_swap_bonus.c push.c swap.c rotate.c \
 		reverse_rotate.c fill_a.c free.c init_info.c sort.c validation.c \
-		ft_atoi2.c
+		ft_atoi2.c argv_handler.c
 
 
 OBJS = $(SRCS:.c=.o)

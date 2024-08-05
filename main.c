@@ -6,27 +6,11 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 13:22:21 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/02 16:15:42 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/05 14:21:19 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static t_stack	*handle_single_argument(char *av)
-{
-	t_stack	*a;
-	char	**set;
-
-	set = ft_split(av, ' ');
-	if (!set)
-	{
-		ft_putstr_fd("Error\n", 2);
-		exit(1);
-	}
-	a = init_stack(set, 1);
-	free_set(set);
-	return (a);
-}
 
 static void	sort_stack(t_stack **a, t_stack **b)
 {
@@ -60,15 +44,23 @@ int	main(int ac, char *av[])
 {
 	t_stack	*a;
 	t_stack	*b;
+	char	**split_args;
 
 	a = NULL;
 	b = NULL;
-	if (ac == 1)
-		return (0);
-	else if (ac == 2)
-		a = handle_single_argument(av[1]);
+	if (ac > 1)
+	{
+		split_args = concat_and_split_args(ac, av);
+		if (!split_args)
+		{
+			ft_putstr_fd("Error\n", 2);
+			return (1);
+		}
+		a = init_stack(split_args);
+		free_set(split_args);
+	}
 	else
-		a = init_stack((av + 1), 0);
+		return (0);
 	sort_stack(&a, &b);
 	free_stack(a);
 	free_stack(b);

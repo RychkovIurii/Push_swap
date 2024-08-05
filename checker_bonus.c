@@ -6,41 +6,30 @@
 /*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 15:02:01 by irychkov          #+#    #+#             */
-/*   Updated: 2024/08/02 16:40:03 by irychkov         ###   ########.fr       */
+/*   Updated: 2024/08/05 14:16:27 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
 
-static t_stack	*handle_single_argument(char *av)
-{
-	t_stack	*a;
-	char	**set;
-
-	set = ft_split(av, ' ');
-	if (!set)
-	{
-		ft_putstr_fd("Error\n", 2);
-		exit(1);
-	}
-	a = init_stack(set, 1);
-	free_set(set);
-	return (a);
-}
-
 int	main(int ac, char *av[])
 {
 	t_stack	*a;
 	t_stack	*b;
+	char	**split_args;
 
 	a = NULL;
 	b = NULL;
-	if (ac == 1)
-		return (0);
-	else if (ac == 2)
-		a = handle_single_argument(av[1]);
+	if (ac > 1)
+	{
+		split_args = concat_and_split_args(ac, av);
+		if (!split_args)
+			print_and_exit();
+		a = init_stack(split_args);
+		free_set(split_args);
+	}
 	else
-		a = init_stack((av + 1), 0);
+		return (0);
 	read_and_execute_instructions(&a, &b);
 	if (is_sorted(a) && b == NULL)
 		ft_printf("OK\n");
