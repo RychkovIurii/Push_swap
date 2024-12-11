@@ -1,5 +1,5 @@
 # Push_swap - Sorting Algorithm
-## Overview
+### Overview
 The Push_swap project aims to implement sorting algorithms in C, using only two stacks (`a` and `b`) to sort a set of integers. It focuses on optimizing the number of operations needed to sort the list, demonstrating an understanding of algorithmic complexity, and implementing basic data structures and operations.  
 Sort data on a stack with a limited set of instructions, using the lowest possible number of actions.  
 I manipulate various types of algorithms and choose the most appropriate solution (out of many) for an optimized data sorting.  
@@ -22,7 +22,7 @@ I manipulate various types of algorithms and choose the most appropriate solutio
 ## Project Details
 - **Total Time Spent**: 17 days
 - **Total Lines of Code**: 724
-- **Commts**: 39
+- **Commts**: 40
 - **Programming Language**: C
 
 
